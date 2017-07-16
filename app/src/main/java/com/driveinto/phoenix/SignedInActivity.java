@@ -95,7 +95,7 @@ public class SignedInActivity extends AppCompatActivity {
         }
     }
 
-    private static final String EXTRA_SIGNED_IN_CONFIG = "extra_signed_in_config";
+    public static final String EXTRA_SIGNED_IN_CONFIG = "extra_signed_in_config";
     private IdpResponse idpResponse;
     private SignedInConfig signedInConfig;
     private View rootView;

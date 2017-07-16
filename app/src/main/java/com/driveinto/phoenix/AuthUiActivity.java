@@ -28,7 +28,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AuthUiActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class AuthUiActivity extends AppCompatActivity implements IAuthorityService.AuthorityCallback {
+    @Inject
+    IAuthorityService service;
 
     private static final String UNCHANGED_CONFIG_VALUE = "CHANGE-ME";
     private static final String GOOGLE_TOS_URL = "https://www.google.com/policies/terms/";
@@ -90,7 +94,9 @@ public class AuthUiActivity extends AppCompatActivity {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            startSignedInActivity(null);
+//            startSignedInActivity(null);
+//            startRegisterActivity(null);
+            this.service.isRegistered(this, null);
             finish();
             return;
         }
@@ -174,7 +180,9 @@ public class AuthUiActivity extends AppCompatActivity {
 
         // Successfully signed in
         if (resultCode == ResultCodes.OK) {
-            startSignedInActivity(response);
+//            startSignedInActivity(response);
+//            startRegisterActivity(response);
+            this.service.isRegistered(this, response);
             finish();
             return;
         } else {
@@ -210,16 +218,36 @@ public class AuthUiActivity extends AppCompatActivity {
         showSnackbar(R.string.unknown_response);
     }
 
-    private void startSignedInActivity(IdpResponse response) {
-        startActivity(
-                SignedInActivity.createIntent(this, response, new SignedInActivity.SignedInConfig(
-                        getSelectedLogo(),
-                        getSelectedTheme(),
-                        getSelectedProviders(),
-                        getSelectedTosUrl(),
-                        enableCredentialSelector.isChecked(),
-                        enableHintSelector.isChecked())));
+    //    private void startSignedInActivity(IdpResponse response) {
+//        startActivity(
+//                SignedInActivity.createIntent(this, response, new SignedInActivity.SignedInConfig(
+//                        getSelectedLogo(),
+//                        getSelectedTheme(),
+//                        getSelectedProviders(),
+//                        getSelectedTosUrl(),
+//                        enableCredentialSelector.isChecked(),
+//                        enableHintSelector.isChecked())));
+//    }
+
+    @Override
+    public void isRegistered(IdpResponse response, boolean result) {
+        SignedInActivity.SignedInConfig config = new SignedInActivity.SignedInConfig(
+                getSelectedLogo(),
+                getSelectedTheme(),
+                getSelectedProviders(),
+                getSelectedTosUrl(),
+                enableCredentialSelector.isChecked(),
+                enableHintSelector.isChecked());
+
+        if(result)
+            startActivity(SignedInActivity.createIntent(this, response, config));
+        else
+            startActivity(RegisterActivity.createIntent(this, response, config));
     }
+
+//    private void startRegisterActivity(IdpResponse response) {
+//        this.service.isRegistered(this, response);
+//    }
 
     @MainThread
     private boolean isGoogleConfigured() {

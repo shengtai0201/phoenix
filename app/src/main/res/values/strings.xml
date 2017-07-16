@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">飛凰顧客關係管理</string>
+    <string name="app_name">顧客關係管理</string>
     <string name="title_activity_signed_in">SignedInActivity</string>
     <string name="title_activity_auth_ui">AuthUiActivity</string>
 
@@ -12,7 +12,7 @@
     <string name="desc_image">Demonstrates displaying an image from Cloud Storage using Glide.</string>
 
     <!-- strings for Auth UI demo activities -->
-    <eat-comment/>
+    <eat-comment />
     <string name="launch_title">FirebaseUI Auth Demo</string>
     <string name="sign_in">Start</string>
     <string name="green_theme">Green Theme</string>
@@ -75,4 +75,5 @@
     <string name="signed_in">Signed In</string>
     <string name="enable_credential_selector">Enable Smart Lock\'s credential selector</string>
     <string name="enable_hint_selector">Enable Smart Lock\'s hint selector</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

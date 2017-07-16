@@ -1,6 +1,7 @@
 package com.driveinto.phoenix.di;
 
 import com.driveinto.phoenix.AuthUiActivity;
+import com.driveinto.phoenix.RegisterActivity;
 import com.driveinto.phoenix.SignedInActivity;
 
 import javax.inject.Singleton;
@@ -13,4 +14,6 @@ public interface AuthComponent {
     void inject(SignedInActivity activity);
 
     void inject(AuthUiActivity activity);
+
+    void inject(RegisterActivity activity);
 }
