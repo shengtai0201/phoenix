@@ -30,7 +30,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class AuthUiActivity extends AppCompatActivity implements IAuthorityService.AuthorityCallback {
+public class AuthUiActivity extends AppCompatActivity implements IAuthorityService.AuthUiCallback {
     @Inject
     IAuthorityService service;
 
@@ -244,10 +244,6 @@ public class AuthUiActivity extends AppCompatActivity implements IAuthorityServi
         else
             startActivity(RegisterActivity.createIntent(this, response, config));
     }
-
-//    private void startRegisterActivity(IdpResponse response) {
-//        this.service.isRegistered(this, response);
-//    }
 
     @MainThread
     private boolean isGoogleConfigured() {

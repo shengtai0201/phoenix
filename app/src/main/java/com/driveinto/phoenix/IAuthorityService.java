@@ -7,15 +7,19 @@ import com.firebase.ui.auth.IdpResponse;
 import java.util.Collection;
 
 public interface IAuthorityService {
-    void isRegistered(AuthorityCallback callback, IdpResponse response);
+    void isRegistered(AuthUiCallback callback, IdpResponse response);
 
-    boolean register(Login login, Customer customer);
+    void register(RegisterCallback callback, Login login, Customer customer);
 
     Collection<Customer> getRegistrationNoMentor(IdpResponse response);
 
     boolean setStudent(IdpResponse response, Customer customer);
 
-    interface AuthorityCallback {
+    interface AuthUiCallback {
         void isRegistered(IdpResponse response, boolean result);
+    }
+
+    interface RegisterCallback {
+        void register(boolean result);
     }
 }
